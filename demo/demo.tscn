@@ -1,0 +1,158 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5cn7rbnkxtvu"]
+
+[ext_resource type="Script" path="res://demo/demo.gd" id="1_bpbs4"]
+[ext_resource type="Script" path="res://addons/surface_2d/surface_2d.gd" id="1_ijf1d"]
+[ext_resource type="PackedScene" uid="uid://6i1ynix8ppei" path="res://demo/player.tscn" id="3_iusu7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_p1shn"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_c8fe0"]
+
+[node name="Demo" type="Node"]
+script = ExtResource("1_bpbs4")
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="InvisibleSurface" type="Polygon2D" parent="Objects" groups=["surfaces"]]
+position = Vector2(1104, 560)
+color = Color(1, 1, 1, 0.2)
+polygon = PackedVector2Array(-88, -24, -80, 64, -8, 120, 72, 96, 144, 48, 120, -40, 64, -80, -16, -80)
+script = ExtResource("1_ijf1d")
+display_debug_rect = true
+
+[node name="Rectangle" type="Polygon2D" parent="Objects"]
+position = Vector2(472, 536)
+rotation = 0.261799
+color = Color(0, 0.4, 1, 1)
+polygon = PackedVector2Array(-128, -64, -128, 64, 128, 64, 128, -64)
+metadata/_edit_group_ = true
+
+[node name="Surface2D" type="Polygon2D" parent="Objects/Rectangle" groups=["surfaces"]]
+color = Color(1, 1, 1, 0.2)
+polygon = PackedVector2Array(-128, -64, -128, 64, 128, 64, 128, -64)
+script = ExtResource("1_ijf1d")
+
+[node name="Triangle" type="Polygon2D" parent="Objects"]
+position = Vector2(528, 208)
+rotation = 1.0472
+color = Color(1, 1, 0.196078, 1)
+polygon = PackedVector2Array(0, -64, -64, 64, 64, 64)
+metadata/_edit_group_ = true
+
+[node name="Surface2D" type="Polygon2D" parent="Objects/Triangle" groups=["surfaces"]]
+color = Color(1, 1, 1, 0.2)
+polygon = PackedVector2Array(0, -64, -64, 64, 64, 64)
+script = ExtResource("1_ijf1d")
+
+[node name="Polygon" type="Polygon2D" parent="Objects"]
+position = Vector2(856, 200)
+color = Color(0, 0.619608, 0.254902, 1)
+polygon = PackedVector2Array(-130, -73, -159, 14, -69, 100, 93, 99, 123, -28, 49, -109)
+metadata/_edit_group_ = true
+
+[node name="Surface2D" type="Polygon2D" parent="Objects/Polygon" groups=["surfaces"]]
+color = Color(1, 1, 1, 0.2)
+polygon = PackedVector2Array(-130, -73, -159, 14, -69, 100, 93, 99, 123, -28, 49, -109)
+script = ExtResource("1_ijf1d")
+
+[node name="Scaled" type="Polygon2D" parent="Objects"]
+position = Vector2(880, 512)
+rotation = -1.5708
+scale = Vector2(3.13226, 2.85668)
+color = Color(1, 0.443137, 1, 1)
+polygon = PackedVector2Array(-24, -40, -40, -16, -24, 24, 16, 40, 48, 24, 32, -24)
+metadata/_edit_group_ = true
+
+[node name="Surface2D" type="Polygon2D" parent="Objects/Scaled" groups=["surfaces"]]
+color = Color(1, 1, 1, 0.2)
+polygon = PackedVector2Array(-24, -40, -40, -16, -24, 24, 16, 40, 48, 24, 32, -24)
+script = ExtResource("1_ijf1d")
+
+[node name="TrailOnly" type="Polygon2D" parent="Objects"]
+position = Vector2(240, 304)
+rotation = -1.0472
+color = Color(0.403922, 0.498039, 0.909804, 1)
+polygon = PackedVector2Array(-256.03, -39.8043, -255.969, 40.1957, 256.03, 39.8043, 255.969, -40.1957)
+metadata/_edit_group_ = true
+
+[node name="Surface2D" type="Polygon2D" parent="Objects/TrailOnly" groups=["surfaces"]]
+color = Color(1, 1, 1, 0.2)
+polygon = PackedVector2Array(-256.03, -39.8043, -255.969, 40.1957, 256.03, 39.8043, 255.969, -40.1957)
+script = ExtResource("1_ijf1d")
+cull_mask = 4
+
+[node name="DebugPolygon" type="Polygon2D" parent="Objects"]
+position = Vector2(1088, 296)
+color = Color(1, 1, 1, 0.2)
+polygon = PackedVector2Array(-16, -24, 16, 96, 152, 88, 160, -72)
+script = ExtResource("1_ijf1d")
+display_debug_polygon = true
+
+[node name="Player" parent="." instance=ExtResource("3_iusu7")]
+position = Vector2(640, 352)
+
+[node name="ParticlesContainer" type="Node2D" parent="."]
+unique_name_in_owner = true
+visibility_layer = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ParticlesList" type="ItemList" parent="MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Controls" type="Label" parent="MarginContainer2"]
+layout_mode = 2
+text = "USE WASD TO MOVE
+PRESS SPACE TO CLEAR ALL SURFACES"
+label_settings = SubResource("LabelSettings_p1shn")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 128.0
+offset_top = 368.0
+offset_right = 366.0
+offset_bottom = 391.0
+rotation = -1.0472
+text = "THIS ONE ONLY DRAWS TRAILS"
+label_settings = SubResource("LabelSettings_c8fe0")
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 752.0
+offset_top = 616.0
+offset_right = 907.0
+offset_bottom = 639.0
+rotation = 0.261799
+text = "THIS ONE IS SCALED"
+label_settings = SubResource("LabelSettings_c8fe0")
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 1032.0
+offset_top = 688.0
+offset_right = 1233.0
+offset_bottom = 711.0
+text = "INVISIBLE SURFACE HERE"
+label_settings = SubResource("LabelSettings_c8fe0")

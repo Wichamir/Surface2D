@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://cpvcpi8fkbhvq"]
+
+[sub_resource type="Curve" id="Curve_dbl44"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qjwob"]
+curve = SubResource("Curve_dbl44")
+
+[sub_resource type="Curve" id="Curve_8020l"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.6, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.9461, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_bmdm1"]
+curve = SubResource("Curve_8020l")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d12w6"]
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_min = 430.56
+initial_velocity_max = 430.56
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+gravity = Vector3(0, 0, 0)
+damping_min = 100.0
+damping_max = 100.0
+scale_min = 14.89
+scale_max = 35.73
+scale_curve = SubResource("CurveTexture_bmdm1")
+color = Color(1, 0, 0, 1)
+alpha_curve = SubResource("CurveTexture_qjwob")
+
+[node name="Blood" type="GPUParticles2D"]
+visibility_layer = 3
+emitting = false
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_d12w6")
+lifetime = 0.4
+one_shot = true
+explosiveness = 0.9
+visibility_rect = Rect2(-139.923, -157.758, 290.363, 319.009)

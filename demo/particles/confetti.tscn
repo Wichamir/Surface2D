@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddrefcxkbt6y2"]
+
+[sub_resource type="Curve" id="Curve_ssd0p"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_dpcu1"]
+curve = SubResource("Curve_ssd0p")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d12w6"]
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_min = 169.19
+initial_velocity_max = 169.19
+gravity = Vector3(0, 0, 0)
+damping_min = 100.0
+damping_max = 100.0
+scale_min = 14.89
+scale_max = 35.73
+color = Color(1, 0, 0, 1)
+alpha_curve = SubResource("CurveTexture_dpcu1")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+
+[sub_resource type="GDScript" id="GDScript_lfk7v"]
+script/source = "extends GPUParticles2D
+
+
+func _ready() -> void:
+	get_tree().create_timer(lifetime - lifetime / 2.).timeout.connect(
+		func():
+			visibility_layer |= 1 << 1
+	)
+"
+
+[node name="Blood" type="GPUParticles2D"]
+emitting = false
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_d12w6")
+lifetime = 4.0
+one_shot = true
+explosiveness = 1.0
+visibility_rect = Rect2(-136.165, -148.263, 260.684, 286.636)
+script = SubResource("GDScript_lfk7v")

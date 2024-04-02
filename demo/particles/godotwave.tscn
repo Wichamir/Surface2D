@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://d3dmvpe3rv55b"]
+
+[ext_resource type="Texture2D" uid="uid://lopav542fi62" path="res://demo/icon.svg" id="1_b20ij"]
+
+[sub_resource type="Curve" id="Curve_qhywq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5053, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_xmtwm"]
+curve = SubResource("Curve_qhywq")
+
+[sub_resource type="Curve" id="Curve_ywhql"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_orsmk"]
+curve = SubResource("Curve_ywhql")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s2rs0"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 49.52
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, -1, 0)
+spread = 10.0
+initial_velocity_min = 700.0
+initial_velocity_max = 1000.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+gravity = Vector3(0, 1000, 0)
+scale_min = 0.2
+scale_max = 0.2
+alpha_curve = SubResource("CurveTexture_xmtwm")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("CurveTexture_orsmk")
+
+[node name="GodotWave" type="GPUParticles2D"]
+visibility_layer = 2
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_s2rs0")
+texture = ExtResource("1_b20ij")
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+visibility_rect = Rect2(-488.328, -479.09, 1002.34, 3030.99)
+trail_enabled = true

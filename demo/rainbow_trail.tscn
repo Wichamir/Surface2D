@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpa7fudh2fqh1"]
+
+[sub_resource type="Gradient" id="Gradient_b4o6p"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.511327, 0.81877, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1.08238, 1, 1, 1, 0.888827, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_swrha"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667, 0.75, 0.833333, 0.916667, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.5, 0, 1, 1, 1, 0, 1, 0.5, 1, 0, 1, 0, 1, 0, 1, 0.588235, 1.06275, 0.498039, 1, 0, 1, 1, 1, 0, 0.5, 1, 1, 0, 0, 1, 1, 0.5, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0.5, 1, 1, 0, 0, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 12
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ykp1a"]
+gradient = SubResource("Gradient_swrha")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="GDScript" id="GDScript_gphgm"]
+script/source = "extends Line2D
+
+
+const MAX_LENGTH := 20
+
+
+@warning_ignore(\"unused_parameter\")
+func _process(delta: float) -> void:
+	var _points: Array = points
+	_points.push_front(owner.global_position)
+	while _points.size() > MAX_LENGTH:
+		_points.pop_back()
+	
+	points = _points
+
+"
+
+[node name="RainbowTrail" type="Line2D"]
+visibility_layer = 7
+width = 40.0
+gradient = SubResource("Gradient_b4o6p")
+texture = SubResource("GradientTexture2D_ykp1a")
+texture_mode = 2
+antialiased = true
+script = SubResource("GDScript_gphgm")
