@@ -13,11 +13,10 @@ const EDITOR_COLOR := Color(Color.WHITE, .2)
 @export var enabled: bool = true:
 	set = _set_enabled
 
-## Defines what [CanvasItem]s should be drawn on the surface based on their [member CanvasItem.visibility_layer].
-## This mask should not overlap with [member CanvasItem.visibility_layer] of the surface itself.
+## Defines what canvas items should be drawn on the surface based on their visibility_layer.
+## This mask should not overlap with visibility_layer of the surface itself.
 @export_flags_2d_render var cull_mask: int = DEFAULT_CULL_MASK:
 	set = _set_cull_mask
-
 
 @export_group("Debug")
 @export var display_debug_rect: bool = false
@@ -30,14 +29,6 @@ const EDITOR_COLOR := Color(Color.WHITE, .2)
 ## Clears the surface.
 func clear() -> void:
 	_subviewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ONCE
-
-## Enables surface updates.
-func enable() -> void:
-	enabled = true
-
-## Disables surface updates.
-func disable() -> void:
-	enabled = false
 
 
 # inner workings below

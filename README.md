@@ -30,7 +30,7 @@ Surface2D is a Godot 4 plugin adding polygonal surfaces on which decals can draw
 
 It is a good practice to name rendering layers, similarly to physics layers, in `Project Settings`.
 
-If a node we want to draw has a parent of canvas item type, then its parent has to also have an appropriate `visibility_layer` set.
+If a node you want to draw has a parent of `CanvasItem` type, then that parent has to also have an appropriate `visibility_layer` set.
 In other words, `visibility_layer` propagates down the tree, similarly to how transforms do.
 
 For understanding how mask culling and visibility layers work I recommend [this](https://www.youtube.com/watch?v=UqQyBv4htqw) excellent tutorial.
