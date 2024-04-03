@@ -70,6 +70,7 @@ func _ready() -> void:
 	_subviewport.size = subviewport_rect.size
 	_subviewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ONCE
 	_subviewport.transparent_bg = true
+	_subviewport.disable_3d = true
 	_subviewport.canvas_cull_mask = cull_mask
 	add_child(_subviewport)
 	
