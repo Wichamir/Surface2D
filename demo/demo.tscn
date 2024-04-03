@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5cn7rbnkxtvu"]
+[gd_scene load_steps=7 format=3 uid="uid://c5cn7rbnkxtvu"]
 
 [ext_resource type="Script" path="res://addons/surface_2d/surface_2d.gd" id="1_ijf1d"]
 [ext_resource type="PackedScene" uid="uid://6i1ynix8ppei" path="res://demo/player.tscn" id="3_iusu7"]
@@ -39,6 +39,14 @@ func spawn_particles(path: String, at: Vector2) -> void:
 
 [sub_resource type="LabelSettings" id="LabelSettings_p1shn"]
 font_size = 20
+
+[sub_resource type="GDScript" id="GDScript_87eea"]
+script/source = "extends Label
+
+
+func _process(_delta: float) -> void:
+	text = \"FPS: %d\" % Engine.get_frames_per_second()
+"
 
 [sub_resource type="LabelSettings" id="LabelSettings_c8fe0"]
 
@@ -163,6 +171,18 @@ layout_mode = 2
 text = "USE WASD TO MOVE
 PRESS SPACE TO CLEAR ALL SURFACES"
 label_settings = SubResource("LabelSettings_p1shn")
+
+[node name="MarginContainer3" type="MarginContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="FPS" type="Label" parent="MarginContainer3"]
+layout_mode = 2
+script = SubResource("GDScript_87eea")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 128.0
