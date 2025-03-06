@@ -8,9 +8,7 @@ const PARTICLES_DIR := "res://demo/particles"
 
 
 func _ready() -> void:
-	for path in DirAccess.get_files_at(PARTICLES_DIR):
-		if path.ends_with(".remap"):
-			path = path.trim_suffix(".remap")
+	for path: String in ResourceLoader.list_directory(PARTICLES_DIR):
 		particles_list.add_item(path)
 	particles_list.select(0)
 
