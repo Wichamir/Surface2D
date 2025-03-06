@@ -23,13 +23,13 @@ script = ExtResource("1_th1ov")
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="InvisibleSurface" type="Polygon2D" parent="Objects" groups=["surfaces"]]
-position = Vector2(1104, 560)
+position = Vector2(127, 117)
 color = Color(1, 1, 1, 0.4)
 polygon = PackedVector2Array(-88, -24, -80, 64, -8, 120, 72, 96, 144, 48, 120, -40, 64, -80, -16, -80)
 script = ExtResource("1_ijf1d")
 
 [node name="Rectangle" type="Polygon2D" parent="Objects"]
-position = Vector2(472, 536)
+position = Vector2(628, 490)
 rotation = 0.261799
 color = Color(0, 0.4, 1, 1)
 polygon = PackedVector2Array(-128, -64, -128, 64, 128, 64, 128, -64)
@@ -41,7 +41,7 @@ polygon = PackedVector2Array(-128, -64, -128, 64, 128, 64, 128, -64)
 script = ExtResource("1_ijf1d")
 
 [node name="Triangle" type="Polygon2D" parent="Objects"]
-position = Vector2(528, 208)
+position = Vector2(557, 224)
 rotation = 1.0472
 color = Color(1, 1, 0.196078, 1)
 polygon = PackedVector2Array(0, -64, -64, 64, 64, 64)
@@ -53,7 +53,7 @@ polygon = PackedVector2Array(0, -64, -64, 64, 64, 64)
 script = ExtResource("1_ijf1d")
 
 [node name="Polygon" type="Polygon2D" parent="Objects"]
-position = Vector2(856, 200)
+position = Vector2(845, 253)
 color = Color(0, 0.619608, 0.254902, 1)
 polygon = PackedVector2Array(-130, -73, -159, 14, -69, 100, 93, 99, 123, -28, 49, -109)
 metadata/_edit_group_ = true
@@ -64,7 +64,7 @@ polygon = PackedVector2Array(-130, -73, -159, 14, -69, 100, 93, 99, 123, -28, 49
 script = ExtResource("1_ijf1d")
 
 [node name="Scaled" type="Polygon2D" parent="Objects"]
-position = Vector2(880, 512)
+position = Vector2(186, 479)
 rotation = -1.5708
 scale = Vector2(3.13226, 2.85668)
 color = Color(1, 0.443137, 1, 1)
@@ -77,23 +77,17 @@ polygon = PackedVector2Array(-24, -40, -40, -16, -24, 24, 16, 40, 48, 24, 32, -2
 script = ExtResource("1_ijf1d")
 
 [node name="TrailOnly" type="Polygon2D" parent="Objects"]
-position = Vector2(240, 304)
-rotation = -1.0472
+position = Vector2(1096, 432)
+rotation = -1.57079
 color = Color(0.403922, 0.498039, 0.909804, 1)
-polygon = PackedVector2Array(-256.03, -39.8043, -255.969, 40.1957, 256.03, 39.8043, 255.969, -40.1957)
+polygon = PackedVector2Array(-256, -71.9994, -256, 120.001, 240, 119.999, 240, -72.0006)
 metadata/_edit_group_ = true
 
 [node name="Surface2D" type="Polygon2D" parent="Objects/TrailOnly" groups=["surfaces"]]
 color = Color(1, 1, 1, 0.4)
-polygon = PackedVector2Array(-256.03, -39.8043, -255.969, 40.1957, 256.03, 39.8043, 255.969, -40.1957)
+polygon = PackedVector2Array(-256, -71.9994, -256, 120.001, 240, 119.999, 240, -72.0006)
 script = ExtResource("1_ijf1d")
 cull_mask = 4
-
-[node name="DebugPolygon" type="Polygon2D" parent="Objects" groups=["surfaces"]]
-position = Vector2(1088, 296)
-color = Color(1, 1, 1, 0.4)
-polygon = PackedVector2Array(-16, -24, 16, 96, 152, 88, 160, -72)
-script = ExtResource("1_ijf1d")
 
 [node name="Player" parent="." instance=ExtResource("3_iusu7")]
 position = Vector2(640, 352)
@@ -152,27 +146,27 @@ layout_mode = 2
 script = SubResource("GDScript_87eea")
 
 [node name="Label" type="Label" parent="GUI"]
-offset_left = 128.0
-offset_top = 368.0
-offset_right = 366.0
-offset_bottom = 391.0
-rotation = -1.0472
+offset_left = 984.0
+offset_top = 696.0
+offset_right = 1222.0
+offset_bottom = 719.0
 text = "THIS ONE ONLY DRAWS TRAILS"
 label_settings = SubResource("LabelSettings_c8fe0")
 
 [node name="Label3" type="Label" parent="GUI"]
-offset_left = 752.0
-offset_top = 616.0
-offset_right = 907.0
-offset_bottom = 639.0
-rotation = 0.261799
+offset_left = 143.0
+offset_top = 605.0
+offset_right = 298.0
+offset_bottom = 628.0
+rotation = -0.421942
 text = "THIS ONE IS SCALED"
 label_settings = SubResource("LabelSettings_c8fe0")
 
 [node name="Label2" type="Label" parent="GUI"]
-offset_left = 1032.0
-offset_top = 688.0
-offset_right = 1233.0
-offset_bottom = 711.0
+offset_left = 54.0
+offset_top = 270.0
+offset_right = 255.0
+offset_bottom = 293.0
+rotation = -0.0861619
 text = "INVISIBLE SURFACE HERE"
 label_settings = SubResource("LabelSettings_c8fe0")
