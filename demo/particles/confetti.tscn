@@ -1,22 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://ddrefcxkbt6y2"]
+[gd_scene load_steps=7 format=3 uid="uid://ddrefcxkbt6y2"]
 
 [sub_resource type="Curve" id="Curve_ssd0p"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_dpcu1"]
 curve = SubResource("Curve_ssd0p")
 
+[sub_resource type="Curve" id="Curve_fsr1y"]
+_data = [Vector2(0, 0), 0.0, 0.2, 0, 1, Vector2(0.5, 0.1), 0.2, 5.82746, 1, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_35ihx"]
+curve = SubResource("Curve_fsr1y")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d12w6"]
 particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
 angle_min = -720.0
 angle_max = 720.0
 spread = 180.0
-initial_velocity_min = 169.19
-initial_velocity_max = 169.19
+initial_velocity_min = 121.82
+initial_velocity_max = 776.65
 gravity = Vector3(0, 0, 0)
-damping_min = 100.0
-damping_max = 100.0
+damping_min = 13.183
+damping_max = 13.183
+damping_curve = SubResource("CurveTexture_35ihx")
 scale_min = 14.89
 scale_max = 35.73
 color = Color(1, 0, 0, 1)
@@ -29,17 +38,15 @@ script/source = "extends GPUParticles2D
 
 
 func _ready() -> void:
-	get_tree().create_timer(lifetime - lifetime / 2.).timeout.connect(
-		func():
-			visibility_layer |= 1 << 1
+	get_tree().create_timer(lifetime * 0.7).timeout.connect(
+		func() -> void: Surface2D.snap(self, 1 << 1)
 	)
 "
 
-[node name="Blood" type="GPUParticles2D"]
+[node name="Confetti" type="GPUParticles2D"]
 emitting = false
 amount = 32
 process_material = SubResource("ParticleProcessMaterial_d12w6")
-lifetime = 4.0
 one_shot = true
 explosiveness = 1.0
 visibility_rect = Rect2(-136.165, -148.263, 260.684, 286.636)

@@ -35,7 +35,7 @@ hue_variation_min = -1.0
 hue_variation_max = 1.0
 hue_variation_curve = SubResource("CurveTexture_orsmk")
 
-[node name="GodotWave" type="GPUParticles2D"]
+[node name="Ribbons" type="GPUParticles2D"]
 visibility_layer = 2
 emitting = false
 amount = 3

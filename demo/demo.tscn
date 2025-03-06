@@ -25,7 +25,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			var path: String = PARTICLES_DIR + '/' + particles_list.get_item_text(particles_list.get_selected_items()[0])
 			spawn_particles(path, event.position)
 	elif event is InputEventKey:
-		if event.keycode == KEY_SPACE:
+		if event.keycode == KEY_SPACE and event.pressed:
 			get_tree().call_group(\"surfaces\", \"clear\")
 
 
@@ -60,7 +60,6 @@ position = Vector2(1104, 560)
 color = Color(1, 1, 1, 0.2)
 polygon = PackedVector2Array(-88, -24, -80, 64, -8, 120, 72, 96, 144, 48, 120, -40, 64, -80, -16, -80)
 script = ExtResource("1_ijf1d")
-display_debug_rect = true
 
 [node name="Rectangle" type="Polygon2D" parent="Objects"]
 position = Vector2(472, 536)
@@ -128,7 +127,6 @@ position = Vector2(1088, 296)
 color = Color(1, 1, 1, 0.2)
 polygon = PackedVector2Array(-16, -24, 16, 96, 152, 88, 160, -72)
 script = ExtResource("1_ijf1d")
-display_debug_polygon = true
 
 [node name="Player" parent="." instance=ExtResource("3_iusu7")]
 position = Vector2(640, 352)
@@ -137,54 +135,56 @@ position = Vector2(640, 352)
 unique_name_in_owner = true
 visibility_layer = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 40.0
+offset_left = -220.0
+offset_bottom = 170.0
 grow_horizontal = 0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="ParticlesList" type="ItemList" parent="MarginContainer"]
+[node name="ParticlesList" type="ItemList" parent="GUI/MarginContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 150)
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="."]
+[node name="MarginContainer2" type="MarginContainer" parent="GUI"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 40.0
+offset_top = -79.0
+offset_right = 385.0
 grow_vertical = 0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Controls" type="Label" parent="MarginContainer2"]
+[node name="Controls" type="Label" parent="GUI/MarginContainer2"]
 layout_mode = 2
 text = "USE WASD TO MOVE
 PRESS SPACE TO CLEAR ALL SURFACES"
 label_settings = SubResource("LabelSettings_p1shn")
 
-[node name="MarginContainer3" type="MarginContainer" parent="."]
+[node name="MarginContainer3" type="MarginContainer" parent="GUI"]
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 43.0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="FPS" type="Label" parent="MarginContainer3"]
+[node name="FPS" type="Label" parent="GUI/MarginContainer3"]
 layout_mode = 2
 script = SubResource("GDScript_87eea")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="GUI"]
 offset_left = 128.0
 offset_top = 368.0
 offset_right = 366.0
@@ -193,7 +193,7 @@ rotation = -1.0472
 text = "THIS ONE ONLY DRAWS TRAILS"
 label_settings = SubResource("LabelSettings_c8fe0")
 
-[node name="Label3" type="Label" parent="."]
+[node name="Label3" type="Label" parent="GUI"]
 offset_left = 752.0
 offset_top = 616.0
 offset_right = 907.0
@@ -202,7 +202,7 @@ rotation = 0.261799
 text = "THIS ONE IS SCALED"
 label_settings = SubResource("LabelSettings_c8fe0")
 
-[node name="Label2" type="Label" parent="."]
+[node name="Label2" type="Label" parent="GUI"]
 offset_left = 1032.0
 offset_top = 688.0
 offset_right = 1233.0
