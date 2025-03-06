@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cpa7fudh2fqh1"]
 
-[ext_resource type="Script" path="res://demo/trail/trail.gd" id="1_fjukd"]
+[ext_resource type="Script" uid="uid://blvuhnpcbe08i" path="res://demo/trail/trail.gd" id="1_fjukd"]
 
 [sub_resource type="Gradient" id="Gradient_b4o6p"]
 interpolation_mode = 2

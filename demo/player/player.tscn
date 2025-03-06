@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://6i1ynix8ppei"]
 
-[ext_resource type="Script" path="res://demo/player/player.gd" id="1_63ivn"]
+[ext_resource type="Script" uid="uid://co6i6qf44nqxr" path="res://demo/player/player.gd" id="1_63ivn"]
 [ext_resource type="Texture2D" uid="uid://lopav542fi62" path="res://demo/player/icon.svg" id="1_w7fg8"]
 [ext_resource type="PackedScene" uid="uid://cpa7fudh2fqh1" path="res://demo/trail/trail.tscn" id="2_2llt4"]
 

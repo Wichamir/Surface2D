@@ -16,7 +16,7 @@ surface_2d/defaults/cull_mask=2
 
 config/name="Surface2D"
 run/main_scene="res://demo/demo.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://addons/surface_2d/icon.svg"
 
 [debug]

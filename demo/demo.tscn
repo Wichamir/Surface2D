@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c5cn7rbnkxtvu"]
 
-[ext_resource type="Script" path="res://addons/surface_2d/surface_2d.gd" id="1_ijf1d"]
-[ext_resource type="Script" path="res://demo/demo.gd" id="1_th1ov"]
+[ext_resource type="Script" uid="uid://c5go5hgnwrj8p" path="res://addons/surface_2d/surface_2d.gd" id="1_ijf1d"]
+[ext_resource type="Script" uid="uid://cu78sfkfxoa2a" path="res://demo/demo.gd" id="1_th1ov"]
 [ext_resource type="PackedScene" uid="uid://6i1ynix8ppei" path="res://demo/player/player.tscn" id="3_iusu7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p1shn"]
