@@ -9,7 +9,7 @@ class_name Surface2D extends Polygon2D
 	set = _set_enabled
 
 ## Defines what canvas items should be drawn on the surface based on their visibility_layer.
-## This mask should not overlap with visibility_layer of the surface itself.
+## This mask should not overlap with the visibility_layer of the surface itself.
 @export_flags_2d_render var cull_mask: int = _Settings.cull_mask:
 	set = _set_cull_mask
 
@@ -26,12 +26,12 @@ class_name Surface2D extends Polygon2D
 
 @export_group("Debug")
 ## For debugging purposes the bounding rectangles of surfaces can be made visible by setting
-## [code]Project -> Tools -> Surface2D Debugger... -> Visible bounding rects[/code] before running the scene.
+## [code]Project > Tools > Surface2D Debugger... > Visible bounding rects[/code] before running the scene.
 ## This setting overrides the default value stored in [code]Project Settings[/code] under
 ## [code]addons/surface_2d/defaults/debug_rect_color[/code].
 @export var debug_rect_color: Color = _Settings.debug_rect_color
 ## For debugging purposes the polygon shapes of surfaces can be made visible by setting
-## [code]Project -> Tools -> Surface2D Debugger... -> Visible polygon shapes[/code] before running the scene.
+## [code]Project > Tools > Surface2D Debugger... > Visible polygon shapes[/code] before running the scene.
 ## This setting overrides the default value stored in [code]Project Settings[/code]
 ## under [code]addons/surface_2d/defaults/debug_polygon_color[/code].
 @export var debug_polygon_color: Color = _Settings.debug_polygon_color
@@ -246,7 +246,8 @@ func _spawn_debug_polygon() -> void:
 	add_child(poly)
 
 
-# Helper static class for reading data. Requires engine restart on changes to project settings.
+# Internal helper static class for reading settings and metadata of the project.
+# Requires engine restart on changes to Surface2D-related project settings.
 class _Settings extends RefCounted:
 	# Project settings
 	static var cull_mask              : int   = ProjectSettings.get_setting("addons/surface_2d/defaults/cull_mask", 0)
@@ -258,7 +259,33 @@ class _Settings extends RefCounted:
 	static var visible_bounding_rects : bool = _get_project_metadata("Surface2D", "visible_bounding_rects", false)
 	static var visible_polygon_shapes : bool = _get_project_metadata("Surface2D", "visible_polygon_shapes", false)
 
-	# Helper method
+
+	static func create_project_settings() -> void:
+		_init_setting("addons/surface_2d/defaults/cull_mask",           0,                      TYPE_INT,   PROPERTY_HINT_LAYERS_2D_RENDER, true)
+		_init_setting("addons/surface_2d/defaults/editor_color",        Color(Color.WHITE, .2), TYPE_COLOR, PROPERTY_HINT_NONE,             true)
+		_init_setting("addons/surface_2d/defaults/debug_rect_color",    Color(Color.WHITE, .2), TYPE_COLOR, PROPERTY_HINT_NONE,             true)
+		_init_setting("addons/surface_2d/defaults/debug_polygon_color", Color(Color.WHITE, .2), TYPE_COLOR, PROPERTY_HINT_NONE,             true)
+	
+
+	static func destroy_project_settings() -> void:
+		ProjectSettings.set_setting("addons/surface_2d/defaults/cull_mask", null)
+		ProjectSettings.set_setting("addons/surface_2d/defaults/editor_color", null)
+		ProjectSettings.set_setting("addons/surface_2d/defaults/debug_rect_color", null)
+		ProjectSettings.set_setting("addons/surface_2d/defaults/debug_polygon_color", null)
+
+
+	static func _init_setting(name: String, default: Variant, type: int, hint: int = PROPERTY_HINT_NONE, requires_restart: bool = false) -> void:
+		if not ProjectSettings.has_setting(name):
+			ProjectSettings.set_setting(name, default)
+		ProjectSettings.set_initial_value(name, default)
+		ProjectSettings.add_property_info({
+			name = name,
+			type = type,
+			hint = hint
+		})
+		ProjectSettings.set_restart_if_changed(name, requires_restart)
+	
+
 	static func _get_project_metadata(section: String, key: String, default: Variant) -> Variant:
 		const METADATA_FILEPATH: String = "res://.godot/editor/project_metadata.cfg"
 
