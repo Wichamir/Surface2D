@@ -57,7 +57,7 @@ script = SubResource("GDScript_gc0xi")
 
 [node name="InvisibleSurface" type="Polygon2D" parent="Objects" groups=["surfaces"]]
 position = Vector2(1104, 560)
-color = Color(1, 1, 1, 0.2)
+color = Color(1, 1, 1, 0.4)
 polygon = PackedVector2Array(-88, -24, -80, 64, -8, 120, 72, 96, 144, 48, 120, -40, 64, -80, -16, -80)
 script = ExtResource("1_ijf1d")
 
@@ -69,7 +69,7 @@ polygon = PackedVector2Array(-128, -64, -128, 64, 128, 64, 128, -64)
 metadata/_edit_group_ = true
 
 [node name="Surface2D" type="Polygon2D" parent="Objects/Rectangle" groups=["surfaces"]]
-color = Color(1, 1, 1, 0.2)
+color = Color(1, 1, 1, 0.4)
 polygon = PackedVector2Array(-128, -64, -128, 64, 128, 64, 128, -64)
 script = ExtResource("1_ijf1d")
 
@@ -81,7 +81,7 @@ polygon = PackedVector2Array(0, -64, -64, 64, 64, 64)
 metadata/_edit_group_ = true
 
 [node name="Surface2D" type="Polygon2D" parent="Objects/Triangle" groups=["surfaces"]]
-color = Color(1, 1, 1, 0.2)
+color = Color(1, 1, 1, 0.4)
 polygon = PackedVector2Array(0, -64, -64, 64, 64, 64)
 script = ExtResource("1_ijf1d")
 
@@ -92,7 +92,7 @@ polygon = PackedVector2Array(-130, -73, -159, 14, -69, 100, 93, 99, 123, -28, 49
 metadata/_edit_group_ = true
 
 [node name="Surface2D" type="Polygon2D" parent="Objects/Polygon" groups=["surfaces"]]
-color = Color(1, 1, 1, 0.2)
+color = Color(1, 1, 1, 0.4)
 polygon = PackedVector2Array(-130, -73, -159, 14, -69, 100, 93, 99, 123, -28, 49, -109)
 script = ExtResource("1_ijf1d")
 
@@ -105,7 +105,7 @@ polygon = PackedVector2Array(-24, -40, -40, -16, -24, 24, 16, 40, 48, 24, 32, -2
 metadata/_edit_group_ = true
 
 [node name="Surface2D" type="Polygon2D" parent="Objects/Scaled" groups=["surfaces"]]
-color = Color(1, 1, 1, 0.2)
+color = Color(1, 1, 1, 0.4)
 polygon = PackedVector2Array(-24, -40, -40, -16, -24, 24, 16, 40, 48, 24, 32, -24)
 script = ExtResource("1_ijf1d")
 
@@ -117,14 +117,14 @@ polygon = PackedVector2Array(-256.03, -39.8043, -255.969, 40.1957, 256.03, 39.80
 metadata/_edit_group_ = true
 
 [node name="Surface2D" type="Polygon2D" parent="Objects/TrailOnly" groups=["surfaces"]]
-color = Color(1, 1, 1, 0.2)
+color = Color(1, 1, 1, 0.4)
 polygon = PackedVector2Array(-256.03, -39.8043, -255.969, 40.1957, 256.03, 39.8043, 255.969, -40.1957)
 script = ExtResource("1_ijf1d")
 cull_mask = 4
 
 [node name="DebugPolygon" type="Polygon2D" parent="Objects" groups=["surfaces"]]
 position = Vector2(1088, 296)
-color = Color(1, 1, 1, 0.2)
+color = Color(1, 1, 1, 0.4)
 polygon = PackedVector2Array(-16, -24, 16, 96, 152, 88, 160, -72)
 script = ExtResource("1_ijf1d")
 

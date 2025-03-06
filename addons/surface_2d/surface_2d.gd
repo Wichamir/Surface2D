@@ -30,6 +30,9 @@ class_name Surface2D extends Polygon2D
 ## This setting overrides the default value stored in [code]Project Settings[/code] under
 ## [code]addons/surface_2d/defaults/debug_rect_color[/code].
 @export var debug_rect_color: Color = _Settings.debug_rect_color
+## Overrides the default value stored in [code]Project Settings[/code] under
+## [code]addons/surface_2d/defautls/debug_rect_border_width[/code].
+@export var debug_rect_border_width: int = _Settings.debug_rect_border_width
 ## For debugging purposes the polygon shapes of surfaces can be made visible by setting
 ## [code]Project > Tools > Surface2D Debugger... > Visible polygon shapes[/code] before running the scene.
 ## This setting overrides the default value stored in [code]Project Settings[/code]
@@ -230,8 +233,8 @@ func _find_subviewport_rect() -> Rect2:
 func _spawn_debug_rect(base: Rect2) -> void:
 	var rect := ReferenceRect.new()
 	rect.editor_only = false
-	rect.border_color = _Settings.debug_rect_color
-	rect.border_width = 2
+	rect.border_color = debug_rect_color
+	rect.border_width = debug_rect_border_width
 	rect.position = base.position
 	rect.size = base.size
 	rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -241,7 +244,7 @@ func _spawn_debug_rect(base: Rect2) -> void:
 func _spawn_debug_polygon() -> void:
 	var poly := Polygon2D.new()
 	poly.polygon = polygon
-	poly.color = _Settings.debug_polygon_color
+	poly.color = debug_polygon_color
 	poly.show_behind_parent = true
 	add_child(poly)
 
@@ -250,50 +253,62 @@ func _spawn_debug_polygon() -> void:
 # Requires engine restart on changes to Surface2D-related project settings.
 class _Settings extends RefCounted:
 	# Project settings
-	static var cull_mask              : int   = ProjectSettings.get_setting("addons/surface_2d/defaults/cull_mask", 0)
-	static var editor_color           : Color = ProjectSettings.get_setting("addons/surface_2d/defaults/editor_color", Color(Color.WHITE, .2))
-	static var debug_rect_color       : Color = ProjectSettings.get_setting("addons/surface_2d/defaults/debug_rect_color", Color(Color.WHITE, .2))
-	static var debug_polygon_color    : Color = ProjectSettings.get_setting("addons/surface_2d/defaults/debug_polygon_color", Color(Color.WHITE, .2))
+	static var cull_mask               : int   = _register_project_setting("addons/surface_2d/defaults/cull_mask",               0,                      TYPE_INT,   PROPERTY_HINT_LAYERS_2D_RENDER, true)
+	static var editor_color            : Color = _register_project_setting("addons/surface_2d/defaults/editor_color",            Color(Color.WHITE, .4), TYPE_COLOR, PROPERTY_HINT_NONE,             true)
+	static var debug_rect_color        : Color = _register_project_setting("addons/surface_2d/defaults/debug_rect_color",        Color(Color.WHITE, .4), TYPE_COLOR, PROPERTY_HINT_NONE,             true)
+	static var debug_rect_border_width : int   = _register_project_setting("addons/surface_2d/defaults/debug_rect_border_width", 1,                      TYPE_INT,   PROPERTY_HINT_NONE,             true)
+	static var debug_polygon_color     : Color = _register_project_setting("addons/surface_2d/defaults/debug_polygon_color",     Color(Color.WHITE, .4), TYPE_COLOR, PROPERTY_HINT_NONE,             true)
 
 	# Project metadata
-	static var visible_bounding_rects : bool = _get_project_metadata("Surface2D", "visible_bounding_rects", false)
-	static var visible_polygon_shapes : bool = _get_project_metadata("Surface2D", "visible_polygon_shapes", false)
+	static var visible_bounding_rects  : bool  = _get_project_metadata("Surface2D", "visible_bounding_rects", false)
+	static var visible_polygon_shapes  : bool  = _get_project_metadata("Surface2D", "visible_polygon_shapes", false)
+
+	static var _project_settings: Array[_ProjectSetting]
 
 
 	static func create_project_settings() -> void:
-		_init_setting("addons/surface_2d/defaults/cull_mask",           0,                      TYPE_INT,   PROPERTY_HINT_LAYERS_2D_RENDER, true)
-		_init_setting("addons/surface_2d/defaults/editor_color",        Color(Color.WHITE, .2), TYPE_COLOR, PROPERTY_HINT_NONE,             true)
-		_init_setting("addons/surface_2d/defaults/debug_rect_color",    Color(Color.WHITE, .2), TYPE_COLOR, PROPERTY_HINT_NONE,             true)
-		_init_setting("addons/surface_2d/defaults/debug_polygon_color", Color(Color.WHITE, .2), TYPE_COLOR, PROPERTY_HINT_NONE,             true)
+		for setting: _ProjectSetting in _project_settings:
+			if not ProjectSettings.has_setting(setting.name):
+				ProjectSettings.set_setting(setting.name, setting.default)
+			ProjectSettings.set_initial_value(setting.name, setting.default)
+			ProjectSettings.add_property_info({
+				name = setting.name,
+				type = setting.type,
+				hint = setting.hint
+			})
+			ProjectSettings.set_restart_if_changed(setting.name, setting.requires_restart)
 	
 
-	static func destroy_project_settings() -> void:
-		ProjectSettings.set_setting("addons/surface_2d/defaults/cull_mask", null)
-		ProjectSettings.set_setting("addons/surface_2d/defaults/editor_color", null)
-		ProjectSettings.set_setting("addons/surface_2d/defaults/debug_rect_color", null)
-		ProjectSettings.set_setting("addons/surface_2d/defaults/debug_polygon_color", null)
+	static func erase_project_settings() -> void:
+		for setting: _ProjectSetting in _project_settings:
+			ProjectSettings.set_setting(setting.name, null)
 
 
-	static func _init_setting(name: String, default: Variant, type: int, hint: int = PROPERTY_HINT_NONE, requires_restart: bool = false) -> void:
-		if not ProjectSettings.has_setting(name):
-			ProjectSettings.set_setting(name, default)
-		ProjectSettings.set_initial_value(name, default)
-		ProjectSettings.add_property_info({
-			name = name,
-			type = type,
-			hint = hint
-		})
-		ProjectSettings.set_restart_if_changed(name, requires_restart)
-	
+	static func _register_project_setting(name: String, default: Variant, type: int, hint: int, requires_restart: bool) -> Variant:
+		var setting: _ProjectSetting = _ProjectSetting.new()
+		setting.name = name
+		setting.default = default
+		setting.type = type
+		setting.hint = hint
+		setting.requires_restart = requires_restart
+		_project_settings.append(setting)
+		return ProjectSettings.get_setting(name, default)
+
 
 	static func _get_project_metadata(section: String, key: String, default: Variant) -> Variant:
 		const METADATA_FILEPATH: String = "res://.godot/editor/project_metadata.cfg"
-
-		if EditorInterface.has_method("get_editor_settings"):                   # in editor
-			return EditorInterface.get_editor_settings().get_project_metadata(section, key, default)
-		elif FileAccess.file_exists(METADATA_FILEPATH) and OS.is_debug_build(): # in game, run from editor
+		
+		if FileAccess.file_exists(METADATA_FILEPATH) and OS.is_debug_build(): # editor
 			var file: ConfigFile = ConfigFile.new()
 			file.load(METADATA_FILEPATH)
 			return file.get_value(section, key, default)
 		
 		return default # exported binary
+	
+	
+	class _ProjectSetting extends RefCounted:
+		var name: String
+		var default: Variant
+		var type: int
+		var hint: int
+		var requires_restart: bool

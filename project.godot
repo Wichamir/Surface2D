@@ -11,8 +11,6 @@ config_version=5
 [addons]
 
 surface_2d/defaults/cull_mask=2
-surface_2d/defaults/debug_rect_color=Color(1, 1, 1, 0.494118)
-surface_2d/defaults/debug_polygon_color=Color(1, 1, 1, 0.443137)
 
 [application]
 
@@ -25,7 +23,6 @@ config/icon="res://addons/surface_2d/icon.svg"
 
 gdscript/warnings/exclude_addons=false
 gdscript/warnings/untyped_declaration=2
-shapes/collision/shape_color=Color(0.903516, 0.28714, 0.289163, 0.42)
 
 [display]
 
