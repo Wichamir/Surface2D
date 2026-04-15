@@ -3,6 +3,8 @@
 class_name Surface2D extends Polygon2D
 ## Surface for drawing decals in 2D.
 
+# Imports
+const _PluginMetadata := preload("res://addons/surface_2d/plugin_metadata.gd")
 
 ## Defines if the surface is updated.
 @export var enabled: bool = true:
@@ -10,14 +12,14 @@ class_name Surface2D extends Polygon2D
 
 ## Defines what canvas items should be drawn on the surface based on their visibility_layer.
 ## This mask should not overlap with the visibility_layer of the surface itself.
-@export_flags_2d_render var cull_mask: int = _Settings.cull_mask:
+@export_flags_2d_render var cull_mask: int = _PluginSettings.cull_mask:
 	set = _set_cull_mask
 
 @export_group("Editor")
 ## Defines color of the rectangle as it is visible in the engine editor.
 ## Overrides default value stored in [code]Project Settings[/code] under
 ## [code]addons/surface_2d/defaults/editor_color[/code].
-@export var editor_color: Color = _Settings.editor_color:
+@export var editor_color: Color = _PluginSettings.editor_color:
 	set(value):
 		editor_color = value
 		if Engine.is_editor_hint():
@@ -29,15 +31,15 @@ class_name Surface2D extends Polygon2D
 ## [code]Project > Tools > Surface2D Debugger... > Visible bounding rects[/code] before running the scene.
 ## This setting overrides the default value stored in [code]Project Settings[/code] under
 ## [code]addons/surface_2d/defaults/debug_rect_color[/code].
-@export var debug_rect_color: Color = _Settings.debug_rect_color
+@export var debug_rect_color: Color = _PluginSettings.debug_rect_color
 ## Overrides the default value stored in [code]Project Settings[/code] under
 ## [code]addons/surface_2d/defautls/debug_rect_border_width[/code].
-@export var debug_rect_border_width: int = _Settings.debug_rect_border_width
+@export var debug_rect_border_width: int = _PluginSettings.debug_rect_border_width
 ## For debugging purposes the polygon shapes of surfaces can be made visible by setting
 ## [code]Project > Tools > Surface2D Debugger... > Visible polygon shapes[/code] before running the scene.
 ## This setting overrides the default value stored in [code]Project Settings[/code]
 ## under [code]addons/surface_2d/defaults/debug_polygon_color[/code].
-@export var debug_polygon_color: Color = _Settings.debug_polygon_color
+@export var debug_polygon_color: Color = _PluginSettings.debug_polygon_color
 @export_group("")
 
 
@@ -48,7 +50,7 @@ var _camera: Camera2D
 ## Returns the default cull mask of the surface as it is stored in
 ## [code]Project Setting[/code] under [code]addons/surface_2d/defaults/cull_mask[/code].
 static func get_default_cull_mask() -> int:
-	return _Settings.cull_mask
+	return _PluginSettings.cull_mask
 
 
 ## Draws a [CanvasItem] for a single frame.
@@ -111,9 +113,9 @@ func _ready() -> void:
 	color = Color.WHITE
 	
 	# debugging
-	if _Settings.visible_bounding_rects:
+	if _PluginMetadata.visible_bounding_rects:
 		_spawn_debug_rect(subviewport_rect)
-	if _Settings.visible_polygon_shapes:
+	if _PluginMetadata.visible_polygon_shapes:
 		_spawn_debug_polygon()
 
 
@@ -249,22 +251,42 @@ func _spawn_debug_polygon() -> void:
 	add_child(poly)
 
 
-# Internal helper static class for reading settings and metadata of the project.
+# Internal helper static class for reading settings of the project.
 # Requires engine restart on changes to Surface2D-related project settings.
-class _Settings extends RefCounted:
-	# Project settings
-	static var cull_mask               : int   = _register_project_setting("addons/surface_2d/defaults/cull_mask",               0,                      TYPE_INT,   PROPERTY_HINT_LAYERS_2D_RENDER, true)
-	static var editor_color            : Color = _register_project_setting("addons/surface_2d/defaults/editor_color",            Color(Color.WHITE, .4), TYPE_COLOR, PROPERTY_HINT_NONE,             true)
-	static var debug_rect_color        : Color = _register_project_setting("addons/surface_2d/defaults/debug_rect_color",        Color(Color.WHITE, .4), TYPE_COLOR, PROPERTY_HINT_NONE,             true)
-	static var debug_rect_border_width : int   = _register_project_setting("addons/surface_2d/defaults/debug_rect_border_width", 1,                      TYPE_INT,   PROPERTY_HINT_NONE,             true)
-	static var debug_polygon_color     : Color = _register_project_setting("addons/surface_2d/defaults/debug_polygon_color",     Color(Color.WHITE, .4), TYPE_COLOR, PROPERTY_HINT_NONE,             true)
+class _PluginSettings extends RefCounted:
+	static var cull_mask: int = _register_project_setting(
+		"addons/surface_2d/defaults/cull_mask",
+		0,
+		TYPE_INT,
+		PROPERTY_HINT_LAYERS_2D_RENDER,
+		true)
+	static var editor_color: Color = _register_project_setting(
+		"addons/surface_2d/defaults/editor_color",
+		Color(Color.WHITE, .4),
+		TYPE_COLOR,
+		PROPERTY_HINT_NONE,
+		true)
+	static var debug_rect_color: Color = _register_project_setting(
+		"addons/surface_2d/defaults/debug_rect_color",
+		Color(Color.WHITE, .4),
+		TYPE_COLOR,
+		PROPERTY_HINT_NONE,
+		true)
+	static var debug_rect_border_width: int = _register_project_setting(
+		"addons/surface_2d/defaults/debug_rect_border_width",
+		1,
+		TYPE_INT,
+		PROPERTY_HINT_NONE,
+		true)
+	static var debug_polygon_color: Color = _register_project_setting(
+		"addons/surface_2d/defaults/debug_polygon_color",
+		Color(Color.WHITE, .4),
+		TYPE_COLOR,
+		PROPERTY_HINT_NONE,
+		true)
 
-	# Project metadata
-	static var visible_bounding_rects  : bool  = _get_project_metadata("Surface2D", "visible_bounding_rects", false)
-	static var visible_polygon_shapes  : bool  = _get_project_metadata("Surface2D", "visible_polygon_shapes", false)
-
-	static var _project_settings: Array[_ProjectSetting]
-
+	static var _project_settings: Array[_ProjectSetting] = []
+	
 
 	static func create_project_settings() -> void:
 		for setting: _ProjectSetting in _project_settings:
@@ -293,19 +315,8 @@ class _Settings extends RefCounted:
 		setting.requires_restart = requires_restart
 		_project_settings.append(setting)
 		return ProjectSettings.get_setting(name, default)
-
-
-	static func _get_project_metadata(section: String, key: String, default: Variant) -> Variant:
-		const METADATA_FILEPATH: String = "res://.godot/editor/project_metadata.cfg"
-		
-		if FileAccess.file_exists(METADATA_FILEPATH) and OS.is_debug_build(): # editor
-			var file: ConfigFile = ConfigFile.new()
-			file.load(METADATA_FILEPATH)
-			return file.get_value(section, key, default)
-		
-		return default # exported binary
 	
-	
+
 	class _ProjectSetting extends RefCounted:
 		var name: String
 		var default: Variant

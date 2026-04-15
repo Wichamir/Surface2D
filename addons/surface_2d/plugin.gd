@@ -12,11 +12,11 @@ func _enter_tree() -> void:
 		preload("res://addons/surface_2d/icon.svg")
 	)
 	
-	Surface2D._Settings.create_project_settings()
+	Surface2D._PluginSettings.create_project_settings()
 
 
 func _exit_tree() -> void:
-	Surface2D._Settings.erase_project_settings()
+	Surface2D._PluginSettings.erase_project_settings()
 
 	remove_custom_type("Surface2D")
 
