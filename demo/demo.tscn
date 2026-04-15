@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5cn7rbnkxtvu"]
+[gd_scene format=3 uid="uid://c5cn7rbnkxtvu"]
 
 [ext_resource type="Script" uid="uid://c5go5hgnwrj8p" path="res://addons/surface_2d/surface_2d.gd" id="1_ijf1d"]
 [ext_resource type="Script" uid="uid://cu78sfkfxoa2a" path="res://demo/demo.gd" id="1_th1ov"]
@@ -17,53 +17,53 @@ func _process(_delta: float) -> void:
 
 [sub_resource type="LabelSettings" id="LabelSettings_c8fe0"]
 
-[node name="Demo" type="Node"]
+[node name="Demo" type="Node" unique_id=910942607]
 script = ExtResource("1_th1ov")
 
-[node name="Objects" type="Node2D" parent="."]
+[node name="Objects" type="Node2D" parent="." unique_id=478476210]
 
-[node name="InvisibleSurface" type="Polygon2D" parent="Objects" groups=["surfaces"]]
+[node name="InvisibleSurface" type="Polygon2D" parent="Objects" unique_id=2057298159 groups=["surfaces"]]
 position = Vector2(127, 117)
 color = Color(1, 1, 1, 0.4)
 polygon = PackedVector2Array(-88, -24, -80, 64, -8, 120, 72, 96, 144, 48, 120, -40, 64, -80, -16, -80)
 script = ExtResource("1_ijf1d")
 
-[node name="Rectangle" type="Polygon2D" parent="Objects"]
+[node name="Rectangle" type="Polygon2D" parent="Objects" unique_id=858785132]
 position = Vector2(628, 490)
 rotation = 0.261799
 color = Color(0, 0.4, 1, 1)
 polygon = PackedVector2Array(-128, -64, -128, 64, 128, 64, 128, -64)
 metadata/_edit_group_ = true
 
-[node name="Surface2D" type="Polygon2D" parent="Objects/Rectangle" groups=["surfaces"]]
+[node name="Surface2D" type="Polygon2D" parent="Objects/Rectangle" unique_id=824411341 groups=["surfaces"]]
 color = Color(1, 1, 1, 0.4)
 polygon = PackedVector2Array(-128, -64, -128, 64, 128, 64, 128, -64)
 script = ExtResource("1_ijf1d")
 
-[node name="Triangle" type="Polygon2D" parent="Objects"]
+[node name="Triangle" type="Polygon2D" parent="Objects" unique_id=984390830]
 position = Vector2(557, 224)
 rotation = 1.0472
 color = Color(1, 1, 0.196078, 1)
 polygon = PackedVector2Array(0, -64, -64, 64, 64, 64)
 metadata/_edit_group_ = true
 
-[node name="Surface2D" type="Polygon2D" parent="Objects/Triangle" groups=["surfaces"]]
+[node name="Surface2D" type="Polygon2D" parent="Objects/Triangle" unique_id=822592595 groups=["surfaces"]]
 color = Color(1, 1, 1, 0.4)
 polygon = PackedVector2Array(0, -64, -64, 64, 64, 64)
 script = ExtResource("1_ijf1d")
 
-[node name="Polygon" type="Polygon2D" parent="Objects"]
+[node name="Polygon" type="Polygon2D" parent="Objects" unique_id=610048934]
 position = Vector2(845, 253)
 color = Color(0, 0.619608, 0.254902, 1)
 polygon = PackedVector2Array(-130, -73, -159, 14, -69, 100, 93, 99, 123, -28, 49, -109)
 metadata/_edit_group_ = true
 
-[node name="Surface2D" type="Polygon2D" parent="Objects/Polygon" groups=["surfaces"]]
+[node name="Surface2D" type="Polygon2D" parent="Objects/Polygon" unique_id=1069635511 groups=["surfaces"]]
 color = Color(1, 1, 1, 0.4)
 polygon = PackedVector2Array(-130, -73, -159, 14, -69, 100, 93, 99, 123, -28, 49, -109)
 script = ExtResource("1_ijf1d")
 
-[node name="Scaled" type="Polygon2D" parent="Objects"]
+[node name="Scaled" type="Polygon2D" parent="Objects" unique_id=1151175570]
 position = Vector2(186, 479)
 rotation = -1.5708
 scale = Vector2(3.13226, 2.85668)
@@ -71,34 +71,34 @@ color = Color(1, 0.443137, 1, 1)
 polygon = PackedVector2Array(-24, -40, -40, -16, -24, 24, 16, 40, 48, 24, 32, -24)
 metadata/_edit_group_ = true
 
-[node name="Surface2D" type="Polygon2D" parent="Objects/Scaled" groups=["surfaces"]]
+[node name="Surface2D" type="Polygon2D" parent="Objects/Scaled" unique_id=468521062 groups=["surfaces"]]
 color = Color(1, 1, 1, 0.4)
 polygon = PackedVector2Array(-24, -40, -40, -16, -24, 24, 16, 40, 48, 24, 32, -24)
 script = ExtResource("1_ijf1d")
 
-[node name="TrailOnly" type="Polygon2D" parent="Objects"]
+[node name="TrailOnly" type="Polygon2D" parent="Objects" unique_id=161448587]
 position = Vector2(1096, 432)
 rotation = -1.57079
 color = Color(0.403922, 0.498039, 0.909804, 1)
 polygon = PackedVector2Array(-256, -71.9994, -256, 120.001, 240, 119.999, 240, -72.0006)
 metadata/_edit_group_ = true
 
-[node name="Surface2D" type="Polygon2D" parent="Objects/TrailOnly" groups=["surfaces"]]
+[node name="Surface2D" type="Polygon2D" parent="Objects/TrailOnly" unique_id=140071920 groups=["surfaces"]]
 color = Color(1, 1, 1, 0.4)
 polygon = PackedVector2Array(-256, -71.9994, -256, 120.001, 240, 119.999, 240, -72.0006)
 script = ExtResource("1_ijf1d")
 cull_mask = 4
 
-[node name="Player" parent="." instance=ExtResource("3_iusu7")]
+[node name="Player" parent="." unique_id=1225970594 instance=ExtResource("3_iusu7")]
 position = Vector2(640, 352)
 
-[node name="ParticlesContainer" type="Node2D" parent="."]
+[node name="ParticlesContainer" type="Node2D" parent="." unique_id=688570690]
 unique_name_in_owner = true
 visibility_layer = 2
 
-[node name="GUI" type="CanvasLayer" parent="."]
+[node name="GUI" type="CanvasLayer" parent="." unique_id=35272901]
 
-[node name="MarginContainer" type="MarginContainer" parent="GUI"]
+[node name="MarginContainer" type="MarginContainer" parent="GUI" unique_id=720903318]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -110,12 +110,12 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="ParticlesList" type="ItemList" parent="GUI/MarginContainer"]
+[node name="ParticlesList" type="ItemList" parent="GUI/MarginContainer" unique_id=162594612]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 150)
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="GUI"]
+[node name="MarginContainer2" type="MarginContainer" parent="GUI" unique_id=1392654894]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -127,13 +127,13 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Controls" type="Label" parent="GUI/MarginContainer2"]
+[node name="Controls" type="Label" parent="GUI/MarginContainer2" unique_id=1189688510]
 layout_mode = 2
 text = "USE WASD TO MOVE
 PRESS SPACE TO CLEAR ALL SURFACES"
 label_settings = SubResource("LabelSettings_p1shn")
 
-[node name="MarginContainer3" type="MarginContainer" parent="GUI"]
+[node name="MarginContainer3" type="MarginContainer" parent="GUI" unique_id=196626186]
 offset_right = 40.0
 offset_bottom = 43.0
 theme_override_constants/margin_left = 10
@@ -141,11 +141,11 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="FPS" type="Label" parent="GUI/MarginContainer3"]
+[node name="FPS" type="Label" parent="GUI/MarginContainer3" unique_id=1449193825]
 layout_mode = 2
 script = SubResource("GDScript_87eea")
 
-[node name="Label" type="Label" parent="GUI"]
+[node name="Label" type="Label" parent="GUI" unique_id=263323550]
 offset_left = 984.0
 offset_top = 696.0
 offset_right = 1222.0
@@ -153,7 +153,7 @@ offset_bottom = 719.0
 text = "THIS ONE ONLY DRAWS TRAILS"
 label_settings = SubResource("LabelSettings_c8fe0")
 
-[node name="Label3" type="Label" parent="GUI"]
+[node name="Label3" type="Label" parent="GUI" unique_id=646332780]
 offset_left = 143.0
 offset_top = 605.0
 offset_right = 298.0
@@ -162,7 +162,7 @@ rotation = -0.421942
 text = "THIS ONE IS SCALED"
 label_settings = SubResource("LabelSettings_c8fe0")
 
-[node name="Label2" type="Label" parent="GUI"]
+[node name="Label2" type="Label" parent="GUI" unique_id=1991721541]
 offset_left = 54.0
 offset_top = 270.0
 offset_right = 255.0
